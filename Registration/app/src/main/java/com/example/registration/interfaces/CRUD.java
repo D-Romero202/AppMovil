@@ -1,7 +1,5 @@
 package com.example.registration.interfaces;
-
 import com.example.registration.model.Empleado;
-
 import java.util.List;
 
 import retrofit2.Call;

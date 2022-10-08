@@ -18,6 +18,7 @@ import com.example.registration.model.Empleado;
 import com.example.registration.utils.Constants;
 
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,8 +30,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
     List<Empleado> empleados;
     CRUD crud;
-    private EditText correo;
-    private EditText Password;
     private String EmailAddress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +48,19 @@ public class LoginActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     EditText email = findViewById(R.id.inputEmail);
                     EditText password = findViewById(R.id.inputPassword);
-                    getAll(email,password);
+                    if(email.getText().toString().length() == 0 || password.getText().toString().length() == 0){
+                        Log.i("Error:","No pueden haber contraseñas ó usuarios vacios");
+                    }else {
+                        String response = getAll(email, password);
+                    }
                 }
             });
 
     }
 
-    private void getAll(EditText email, EditText password){
+    private String getAll(EditText email, EditText password){
 
-
+        EmailAddress = "Nuevo Ingreso";
         Retrofit retrofit=new Retrofit.Builder().baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();
 
@@ -75,14 +78,20 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                Log.e("Email:", String.valueOf(email.getText()));
+                String emailComparative =  email.getText().toString().toLowerCase(Locale.ROOT);
+                String passComparative = password.getText().toString();
                 empleados = response.body();
                 empleados.forEach(p -> {
-                    int i = Log.i("Prods: ", p.getEmail().toString());
-                 EmailAddress = p.getEmail();
-
+                    //int i = Log.i("Prods: ", p.getEmail().toString());
+                    Log.i("XD",emailComparative);
+                 if (emailComparative.equals(p.getEmail().toString().toLowerCase(Locale.ROOT))  && passComparative.equals(p.getPassword().toString())){
+                     EmailAddress = "Es correcto";
+                 }
                 });
-                Log.i("prueba", EmailAddress);
+
+                if(EmailAddress.equals("Es correcto")){
+                    startActivity(new Intent(LoginActivity.this, LoginSuccess.class));
+                }
             }
 
             @Override
@@ -92,5 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("Throw err: ",t.getMessage());
             }
         });
+        return EmailAddress;
     }
 }

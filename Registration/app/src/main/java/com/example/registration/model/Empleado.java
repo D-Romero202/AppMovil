@@ -28,6 +28,8 @@ public class Empleado {
         return email;
     }
 
+    public String getPassword(){return  password;}
+
     @Override
     public String toString() {
         return "Empleado{" +
