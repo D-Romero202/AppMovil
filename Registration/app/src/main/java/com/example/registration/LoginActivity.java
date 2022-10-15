@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
 
                 if(EmailAddress.equals("Es correcto")){
-                    startActivity(new Intent(LoginActivity.this, LoginSuccess.class));
+                    startActivity(new Intent(LoginActivity.this, SliderMenuActivity.class));
                 }
             }
 
