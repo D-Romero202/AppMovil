@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+	android:orientation="vertical">
+
+
+	<com.google.android.material.tabs.TabLayout
+		android:id="@+id/tablayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/design_default_color_primary_dark">
+
+		<com.google.android.material.tabs.TabItem
+			android:id="@+id/tabcontactos"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:icon="@drawable/icono_contactos"
+			android:text="CONTACTOS" />
+
+		<com.google.android.material.tabs.TabItem
+			android:id="@+id/tabcorreos"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:icon="@drawable/icono_correos"
+			android:text="CORREOS" />
+
+		<com.google.android.material.tabs.TabItem
+			android:id="@+id/tabmensajes"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:icon="@drawable/icono_mensajes"
+			android:text="MENSAJES" />
+
+	</com.google.android.material.tabs.TabLayout>
+	<androidx.viewpager.widget.ViewPager
+		android:id="@+id/viewpager"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"/>
+</LinearLayout>
